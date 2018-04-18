@@ -1,0 +1,21 @@
+- name: Install AD-Domain-Services Feature -(1/4 win_ad_install)
+  win_feature:
+    name: AD-Domain-Services
+    include_management_tools: yes
+    include_sub_feature: yes
+
+- name: Setup Active Directory Controller -(2/4 win_ad_install)
+  win_domain:
+    dns_domain_name: "{{ ad_domain_name }}"
+    safe_mode_password: "{{ ad_safe_mode_password }}"
+  register: active_directory_controllers
+
+- name: Reboot The DC Just Created -(3/4 win_ad_install)
+  win_reboot:
+  when: active_directory_controllers.reboot_required
+
+- name: List DCs In Domain -(4/4 win_ad_install)
+  win_shell: "nltest /dclist:{{ ad_domain_name }}"
+
+- debug:
+  var: domain_list

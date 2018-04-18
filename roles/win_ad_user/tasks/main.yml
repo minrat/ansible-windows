@@ -1,0 +1,16 @@
+- name: Create Windows Domain Group -(1/2 win_domain_user)
+  win_domain_group:
+     name: "{{ item.group_name }}"
+     scope: "{{ item.group_scope }}"
+     state: present
+  with_items: "{{ user_info }}"
+
+- name: Create AD User  -(2/2 win_domain_user)
+  win_domain_user:
+     name: "{{ item.name }}"
+     firstname: "{{ item.firstname }}"
+     surname: "{{ item.surname }}"
+     password: "{{ item.password }}"
+     state: present
+     email: '"{{ item.name}}"@ad1${GUID}.example.opentlc.com'
+  with_items: "{{ user_info }}"

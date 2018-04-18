@@ -1,0 +1,29 @@
+
+- name: win_ad_install
+  hosts: windows
+  become: yes
+  gather_facts: true
+  vars_files:
+    - ./vars.yml
+  roles:
+    - name: win_ad_install
+      tags: win_ad_install
+      when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"
+
+
+- name: win_ad_user
+  hosts: windows
+  become: yes
+  gather_facts: true
+  roles:
+    - name: win_ad_user 
+      tags: win_ad_user
+
+- name: win_ssh_service_config
+  hosts: windows
+  become: yes
+  gather_facts: true
+  roles:
+    - name: win_service_config
+      tags: win_ssh_service_config
+      when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"

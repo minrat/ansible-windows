@@ -1,0 +1,4 @@
+user_info:
+   - { name: 'gemini', firstname: 'Gemini', surname: 'Chen', password: 'redhat@123', group_name: 'DEV', group_scope: 'domainlocal'}
+   - { name: 'ccv', firstname: 'CCV', surname: 'Chen', password: 'redhat@123', group_name: 'QA', group_scope: 'domainlocal'}
+   - { name: 'ads', firstname: 'ADS', surname: 'Chen', password: 'redhat@123', group_name: 'MARKET', group_scope: 'domainlocal'}

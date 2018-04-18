@@ -1,0 +1,24 @@
+# Install Windows Package
+- name: Install Windows Package -(1/3 win_service_config)
+  win_chocolatey:
+     name: "{{ package_name }}"
+     params: "{{ parameters }}"
+     state: latest
+  when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"
+
+# Start The Windows Service 
+- name: Start The Windows Service -(2/3 win_service_config)
+  win_service:
+     name: "{{ service_name }}"
+     start_mode: auto
+  when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"
+
+- name: Add Win_firewalld Rule -(3/3 win_service_config)
+  win_firewall_rule:
+     name: "{{ service_name }}"
+     localport: "{{ service_port }}"
+     action: allow
+     direction: in
+     protocol: "{{ protocol_name }}"
+     state: present
+     enabled: yes

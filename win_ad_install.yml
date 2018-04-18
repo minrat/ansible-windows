@@ -1,0 +1,5 @@
+- hosts: windows
+  vars_files:
+    - ./vars.yml
+  roles:
+    - win_ad_install

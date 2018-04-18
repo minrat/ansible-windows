@@ -1,0 +1,3 @@
+- import_playbook: win_ad_install.yml
+- import_playbook: win_ad_user_group_create.yml
+- import_playbook: win_ssh_service_config.yml
